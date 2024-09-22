@@ -2,9 +2,9 @@ name: Get current datetime from default Ubuntu command
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
