@@ -2,40 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <!-- Версия модели POM -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Метаданные проекта -->
     <groupId>org.example</groupId>
     <artifactId>my-test-project</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <!-- Свойства проекта -->
     <properties>
-        <!-- Версия Java для компиляции исходного кода -->
         <maven.compiler.source>17</maven.compiler.source>
-        <!-- Версия Java для компиляции целевого кода -->
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
-    <!-- Конфигурация сборки -->
     <build>
         <plugins>
-            <!-- Плагин для создания "uber" JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <executions>
                     <execution>
                         <goals>
-                            <!-- Цель плагина для создания "uber" JAR -->
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <!-- Присоединить "uber" JAR к сборке -->
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
-                                <!-- Трансформер для добавления Main-Class в манифест JAR -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>org.example.Main</mainClass>
                                 </transformer>
