@@ -49,7 +49,7 @@ public class MergeSortTest {
     */
     public void testSortWithMaxElements() {
         List<Integer> arr = new ArrayList<>();
-        for (int i = 0; i < 4999; i++) {
+        for (int i = 0; i < 5000; i++) {
             arr.add(i);
         }
         assertDoesNotThrow(() -> MergeSort.sort(arr));
