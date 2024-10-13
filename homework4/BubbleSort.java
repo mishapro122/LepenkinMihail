@@ -2,8 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BubbleSort {
+    /**
+    * SIZE - максимально возможный размер массива
+    */
     private static final int SIZE = 5000;
 
+    /**
+    * sort - функция сортировки массива, которая выводит копию отсортированного заданного массива
+    * сначала идет проверка на то, является ли массив пустым, если является, то выводит @throw NullPointerException
+    * потом идет проверка на размер, если размер массива больше чем максимальный, то выводит @throw IllegalStateException
+    * далее создается sortArr - копия изначального массива, которую мы будем сортировать
+    * в конце реализована сортировка пузырьком и вывод отсортировонного массива
+    */
+    
     public static List<Integer> sort(List<Integer> arr) {
         if (arr == null) {
             throw new NullPointerException("нельзя отсортировать пустой массив");
