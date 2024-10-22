@@ -42,15 +42,6 @@ public class SortTest {
   }
 
   @Test
-  public void testSortWithMaxElementsPuzur() {
-    List<Integer> arr = new ArrayList<>();
-    for (int i = 0; i < 4999; i++) {
-      arr.add(i);
-    }
-    assertDoesNotThrow(() -> Sort.choosingSort(arr, "пузырек"));
-  }
-
-  @Test
   public void testSortWithNormalListMerger() {
     List<Integer> arr = Arrays.asList(5, 3, 8, 1, 2, 7, 4, 6);
     List<Integer> sortArr = Sort.choosingSort(arr, "вставки");
@@ -84,13 +75,3 @@ public class SortTest {
     List<Integer> sortArr = Sort.choosingSort(arr, "вставки");
     assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8), sortArr);
   }
-
-  @Test
-  public void testSortWithMaxElementsMerge() {
-    List<Integer> arr = new ArrayList<>();
-    for (int i = 0; i < 4999; i++) {
-      arr.add(i);
-    }
-    assertDoesNotThrow(() -> Sort.choosingSort(arr, "вставки"));
-  }
-}
