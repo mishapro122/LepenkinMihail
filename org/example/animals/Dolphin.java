@@ -8,11 +8,6 @@ public class Dolphin extends Predator implements Waterfowl {
   public void swim() {
     System.out.println("Dolphin swim");
   }
-
-  @Override
-  public void typeAnimal() {
-    System.out.println("Dolphin - predator");
-  }
   @Override
   public void eat(String food) {
     if (food.equals("Fish") || food.equals("fish")) {
