@@ -6,9 +6,5 @@ public class Interface {
 
         void remove(int index);
 
-        void print();
-
-        void len();
-
     }
 }
