@@ -9,10 +9,10 @@ public class Sort {
      * если пользователь хочет использовать другую сортировку, то @throw IllegalStateException
      */
     public static List<Integer> choosingSort(List<Integer> arr, String type) {
-        if (type.equals(" пузырек")) {
+        if (type.equals("пузырек")) {
             return BubbleSort.sort(arr);
         }
-        else if (type.equals(" вставки")) {
+        else if (type.equals("вставки")) {
             return MergeSort.sort(arr);
         }
         else {
