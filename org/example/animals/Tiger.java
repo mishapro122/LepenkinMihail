@@ -9,10 +9,6 @@ public class Tiger extends Animals implements Herbivorous, Overland{
     System.out.println("Tiger walk");
   }
   @Override
-  public void printEat() {
-    System.out.println("Tiger eat beef");
-  }
-  @Override
   public void eat(String food) {
     if (food.equals("beef") || food.equals("Beef")) {
       System.out.println("Tiger eat beef");
