@@ -17,12 +17,6 @@ public class Camel extends Animals implements Herbivorous, Overland{
       System.out.println("Camel doesn't eat it");
     }
   }
-
-  @Override
-  public void printEat() {
-    System.out.println("Camel eat grass");
-  }
-
   @Override
   public void typeAnimal() {
     System.out.println("Camel - herbivorous");
