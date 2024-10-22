@@ -5,12 +5,7 @@ import org.example.wayOfEating.Predator;
 
 public class Eagle extends Predator implements Flying {
   @Override
-  public void typeAnimal() {
-    System.out.println("Eagle - predator");
-  }
-  @Override
   public void fly() {
-
     System.out.println("Eagle fly");
   }
 
