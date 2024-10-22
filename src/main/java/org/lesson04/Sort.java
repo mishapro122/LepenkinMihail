@@ -8,15 +8,10 @@ public class Sort {
      * пока на выбор дается только два вида сортировок только пузырьком и вставками
      * если пользователь хочет использовать другую сортировку, то @throw IllegalStateException
      */
-    public static List<Integer> choosingSort(List<Integer> arr, String type) {
-        if (type.equals("пузырек")) {
-            return BubbleSort.sort(arr);
-        }
-        else if (type.equals("вставки")) {
-            return MergeSort.sort(arr);
-        }
-        else {
-            throw new IllegalStateException("выбранного типа не существует");
-        }
+    public static List<Integer> choosingSort(List<Integer> arr,  SortTypes type) {
+        return switch (type) {
+            case BUBBLE -> BubbleSort.sort(arr);
+            case MERGE -> MergeSort.sort(arr);
+        };
     }
 }
