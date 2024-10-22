@@ -1,7 +1,7 @@
 package org.example.animals;
 
-import org.example.area.Flying;
-import org.example.wayOfEating.Predator;
+import org.example.area.*;
+import org.example.eating.*;
 
 public class Eagle extends Predator implements Flying {
   @Override
