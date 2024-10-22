@@ -8,12 +8,6 @@ public class Eagle extends Predator implements Flying {
   public void typeAnimal() {
     System.out.println("Eagle - predator");
   }
-
-  @Override
-  public void printEat() {
-    System.out.println("Eagle eat meat");
-  }
-
   @Override
   public void fly() {
 
