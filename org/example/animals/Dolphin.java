@@ -1,7 +1,7 @@
 package org.example.animals;
 
-import org.example.area.Waterfowl;
-import org.example.wayOfEating.Predator;
+import org.example.area.*;
+import org.example.eating.*;
 
 public class Dolphin extends Predator implements Waterfowl {
   @Override
