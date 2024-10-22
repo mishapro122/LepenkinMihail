@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class homeworkThird {
+public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int n = 15;
@@ -8,17 +8,10 @@ public class homeworkThird {
         for (int i = 0; i < n; i++) {
             data[i] = input.nextInt();
         }
-        СustomArrays.CustomArr<Integer> arrey = new СustomArrays.CustomArr<>(data, n);
-        arrey.print();
-        arrey.len();
+        CustomArrays<Integer> arrey = new CustomArrays<>(data, n);
         arrey.add(152);
         n++;
-        arrey.add(null);
-        arrey.get(n / 2);
-        arrey.print();
-        arrey.len();
+        System.out.println(arrey.get(n / 2));
         arrey.remove(10);
-        arrey.print();
-        arrey.len();
     }
 }
