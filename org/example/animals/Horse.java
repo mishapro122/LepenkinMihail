@@ -1,7 +1,7 @@
 package org.example.animals;
 
-import org.example.area.Overland;
-import org.example.wayOfEating.Herbivorous;
+import org.example.area.*;
+import org.example.eating.*;
 
 public class Horse extends Animals implements Herbivorous, Overland {
   @Override
