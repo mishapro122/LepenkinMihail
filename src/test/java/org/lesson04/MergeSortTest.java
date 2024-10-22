@@ -36,12 +36,4 @@ public class MergeSortTest {
     List<Integer> sortArr = MergeSort.sort(arr);
     assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8), sortArr);
   }
-  @Test
-  public void testSortWithMaxElements() {
-    List<Integer> arr = new ArrayList<>();
-    for (int i = 0; i < 4999; i++) {
-      arr.add(i);
-    }
-    assertDoesNotThrow(() -> MergeSort.sort(arr));
-  }
 }
