@@ -8,7 +8,7 @@ public class homeworkThird {
         for (int i = 0; i < n; i++) {
             data[i] = input.nextInt();
         }
-        СustomArrays.CustomArr<Integer> arrey = new СustomArrays.CustomArr<>(data, n);
+        СustomArrays<Integer> arrey = new СustomArrays<>(data, n);
         arrey.print();
         arrey.len();
         arrey.add(152);
