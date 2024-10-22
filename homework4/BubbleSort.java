@@ -9,7 +9,7 @@ public class BubbleSort {
 
     /**
     * sort - функция сортировки массива, которая выводит копию отсортированного заданного массива
-    * сначала идет проверка на то, является ли массив пустым, если является, то выводит @throw NullPointerException
+    * сначала идет проверка на то, является ли массив пустым, если является, то выводит @throw IllegalArgumentException
     * потом идет проверка на размер, если размер массива больше чем максимальный, то выводит @throw IllegalStateException
     * далее создается sortArr - копия изначального массива, которую мы будем сортировать
     * в конце реализована сортировка пузырьком и вывод отсортировонного массива
@@ -17,7 +17,7 @@ public class BubbleSort {
     
     public static List<Integer> sort(List<Integer> arr) {
         if (arr == null) {
-            throw new NullPointerException("нельзя отсортировать пустой массив");
+            throw new IllegalArgumentException("нельзя отсортировать пустой массив");
         }
         if (arr.size() > SIZE) {
             throw new IllegalStateException("размер массива слишком большой");
