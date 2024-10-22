@@ -9,16 +9,10 @@ public class homeworkThird {
             data[i] = input.nextInt();
         }
         СustomArrays<Integer> arrey = new СustomArrays<>(data, n);
-        arrey.print();
-        arrey.len();
         arrey.add(152);
         n++;
         arrey.add(null);
         arrey.get(n / 2);
-        arrey.print();
-        arrey.len();
         arrey.remove(10);
-        arrey.print();
-        arrey.len();
     }
 }
