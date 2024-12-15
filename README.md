@@ -1,4 +1,4 @@
-# Задание 1
+# Запрос 1
 
 ```
 SELECT COUNT(*) FROM (SELECT profile_id FROM profile 
@@ -6,11 +6,11 @@ EXCEPT
 SELECT DISTINCT profile_id FROM post) AS X
 ```
 
-| |count|
-|-|------|
-|1|5|
+|count|
+|-----|
+|5|
 
-# Задание 2
+# Запрос 2
 
 ```
 SELECT post_id FROM post WHERE
@@ -22,20 +22,20 @@ INTERSECT SELECT post_id FROM post WHERE LENGTH(content) > 20
 ORDER BY (post_id)
 ```
 
-| |post_id|
-|-|-------|
-|1|22|
-|2|24|
-|3|26|
-|4|28|
-|5|32|
-|6|34|
-|7|36|
-|8|38|
-|9|42|
-|10|44|
+|post_id|
+|-------|
+|22|
+|24|
+|26|
+|28|
+|32|
+|34|
+|36|
+|38|
+|42|
+|44|
 
-# Задание 3
+# Запрос 3
 
 ```
 SELECT post_id from comment GROUP BY (post_id) HAVING COUNT(*) <= 1
@@ -43,15 +43,15 @@ ORDER BY (post_id)
 LIMIT 10
 ```
 
-| |post_id|
-|-|-------|
-|1|1|
-|2|3|
-|3|5|
-|4|7|
-|5|9|
-|6|11|
-|7|13|
-|8|15|
-|9|17|
-|10|19|
+|post_id|
+|-------|
+|1|
+|3|
+|5|
+|7|
+|9|
+|11|
+|13|
+|15|
+|17|
+|19|
