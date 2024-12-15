@@ -1,8 +1,9 @@
 # Задание 1
-
+'''
 SELECT COUNT(*) FROM (SELECT profile_id FROM profile 
 EXCEPT
 SELECT DISTINCT profile_id FROM post) AS X
+'''
 
 |-|------|
 |1|5|
