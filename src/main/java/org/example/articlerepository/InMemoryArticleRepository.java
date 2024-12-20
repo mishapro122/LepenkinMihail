@@ -29,7 +29,7 @@ public class InMemoryArticleRepository implements ArticleRepository {
     public Article findById(long articleId) {
         Article article=articleMap.get(articleId);
 
-        if (article==null){
+        if (article==null) {
             throw new ArticleNotFoundException("Cannot find article by id=" + articleId);
         }
         return article;
@@ -37,7 +37,7 @@ public class InMemoryArticleRepository implements ArticleRepository {
 
     @Override
     public synchronized void create(Article article) {
-        if (articleMap.containsKey(article.getId())){
+        if (articleMap.containsKey(article.getId())) {
             throw new ArticleIdDuplicatedException("Article with the given id already exists: "+article.getId());
         }
         articleMap.put(article.getId(),article);
@@ -45,7 +45,7 @@ public class InMemoryArticleRepository implements ArticleRepository {
 
     @Override
     public synchronized void update(Article article) {
-        if (!articleMap.containsKey(article.getId())){
+        if (!articleMap.containsKey(article.getId())) {
             throw new ArticleNotFoundException("Cannot find article by id=" + article.getId());
         }
         articleMap.put(article.getId(),article);
@@ -53,12 +53,12 @@ public class InMemoryArticleRepository implements ArticleRepository {
 
     @Override
     public void delete(long articleId, CommentRepository commentRepository) {
-        if (!articleMap.containsKey(articleId)){
+        if (!articleMap.containsKey(articleId)) {
             throw new ArticleNotFoundException("Cannot find article by id=" + articleId);
         }
         Article article=articleMap.get(articleId);
         List<Comment> comments=new ArrayList<>(List.copyOf(article.getComments()));
-        for (Comment comment : comments){
+        for (Comment comment : comments) {
             commentRepository.delete(comment.getId());
         }
         articleMap.remove(articleId);
