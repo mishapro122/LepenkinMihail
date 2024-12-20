@@ -23,7 +23,7 @@ public class Main {
         Service service = Service.ignite();
         ObjectMapper objectMapper = new ObjectMapper();
         InMemoryArticleRepository articleRepository=new InMemoryArticleRepository();
-        InMemoryCommentRepository commentRepository=new InMemoryCommentRepository();
+        InMemoryCommentRepository commentRepository=new InMemoryCommentRepository(InMemoryArticleRepository);
         ArticleService articleService=new ArticleService(articleRepository,commentRepository);
         Application application = new Application(List.of(new ArticleController(service,articleService,objectMapper), new ArticleFreemarkerController(service, articleService, TemplateFactory.freeMarkerEngine())));
         application.start();
