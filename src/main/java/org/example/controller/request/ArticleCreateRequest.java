@@ -1,8 +1,10 @@
 package org.example.controller.request;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Set;
+
 public class ArticleCreateRequest {
     private final String name;
     private final Set<String> tags;
@@ -19,4 +21,5 @@ public class ArticleCreateRequest {
     public String getName() {
         return name;
     }
+
 }
