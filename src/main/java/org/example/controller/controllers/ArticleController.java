@@ -1,21 +1,22 @@
 package org.example.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.service.ArticleService;
 import org.example.article.Article;
-import org.example.comment.Comment;
 import org.example.controller.Controller;
 import org.example.controller.request.ArticleCreateRequest;
 import org.example.controller.request.ArticleUpdateRequest;
-import org.example.controller.request.CommentCreateRequest;
-import org.example.controller.request.CommentUpdateRequest;
+import org.example.controller.request.ArticlesListCreateRequest;
 import org.example.controller.response.*;
 import org.example.exceptions.*;
+import org.example.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Service;
+
+import java.util.*;
+
 public class ArticleController implements Controller {
     private static final Logger LOG = LoggerFactory.getLogger(ArticleController.class);
     private final Service service;
@@ -31,13 +32,10 @@ public class ArticleController implements Controller {
     @Override
     public void initializeEndpoints() {
         createArticle();
-        createComment();
+        createArticles();
         updateArticle();
-        updateComment();
         deleteArticle();
-        deleteComment();
         getArticle();
-        getComment();
     }
     private void getArticle(){
         service.get("api/articles/:articleId",(Request request, Response response)->{
@@ -47,7 +45,7 @@ public class ArticleController implements Controller {
                 Article article=articleService.findArticleById(articleId);
                 response.status(201);
                 LOG.debug("Article is got");
-                return objectMapper.writeValueAsString(new ArticleGetResponse(article.getName(), article.getTags(), article.getComments()));
+                return objectMapper.writeValueAsString(new ArticleGetResponse(article.getName(), article.getTags().toString(), article.getComments().toString(), article.isTrending()));
             }
             catch (ArticleNotFoundException e){
                 LOG.warn("cannot find article", e);
@@ -56,7 +54,7 @@ public class ArticleController implements Controller {
             }
         });
     }
-    private void getComment(){
+    /*private void getComment(){
         service.get("api/comments/:commentId",(Request request, Response response)->{
             response.type("aplication/json");
             long commentId=Long.parseLong(request.params("commentId"));
@@ -72,7 +70,7 @@ public class ArticleController implements Controller {
                 return objectMapper.writeValueAsString(new ErrorResponse(e.getMessage()));
             }
         });
-    }
+    }*/
     private void createArticle(){
         service.post("/api/articles",(Request request, Response response) -> {
             response.type("application/json");
@@ -91,7 +89,31 @@ public class ArticleController implements Controller {
             }
         });
     }
-    private void createComment(){
+    private void createArticles(){
+        service.post("/api/articles/articlesList",(Request request, Response response) ->{
+            response.type("application/json");
+            String body = request.body();
+            //ArticlesListCreateRequest articlesListCreateRequest = objectMapper.readValue(body,ArticlesListCreateRequest.class);
+            ArticlesListCreateRequest requestList = objectMapper.readValue(body, ArticlesListCreateRequest.class);
+            List<Map<String,Set<String>>> articlesList = new ArrayList<>();
+            for (ArticleCreateRequest createRequest : requestList.getArticlesList()){
+                articlesList.add(Map.of(createRequest.getName(),createRequest.getTags()));
+            }
+            try {
+                //Set<Map<String,Long>> resultSet = articleService.createArticles(articlesListCreateRequest.getArticlesList());
+                Set<Map<String,Long>> resultSet = articleService.createArticles(articlesList);
+                response.status(201);
+                LOG.debug("Articles are created");
+                return objectMapper.writeValueAsString(new ArticlesListCreateResponse(resultSet));
+            }
+            catch (ArticleCreateException e){
+                LOG.warn("cannot create article", e);
+                response.status(400);
+                return objectMapper.writeValueAsString(new ErrorResponse(e.getMessage()));
+            }
+        });
+    }
+    /*private void createComment(){
         service.post("/api/comments", (Request request, Response response) ->{
             response.type("application/json");
             String body=request.body();
@@ -108,7 +130,7 @@ public class ArticleController implements Controller {
                 return objectMapper.writeValueAsString(new ErrorResponse(e.getMessage()));
             }
         });
-    }
+    }*/
     private void updateArticle(){
         service.put("/api/articles/:articleId", (Request request, Response response)->{
             response.body("application/json");
@@ -126,7 +148,7 @@ public class ArticleController implements Controller {
             }
         });
     }
-    private void updateComment(){
+    /*private void updateComment(){
         service.put("/api/comments/:commentId", (Request request, Response response)->{
             response.body("application/json");
             long commentId=Long.parseLong(request.params("commentId"));
@@ -142,7 +164,7 @@ public class ArticleController implements Controller {
                 return objectMapper.writeValueAsString(new ErrorResponse(e.getMessage()));
             }
         });
-    }
+    }*/
     private void deleteArticle(){
         service.delete("/api/articles/:articleId", (Request request, Response response)->{
             response.body("application/json");
@@ -160,7 +182,7 @@ public class ArticleController implements Controller {
             }
         });
     }
-    private void deleteComment(){
+    /*private void deleteComment(){
         service.delete("/api/comments/:commentId", (Request request, Response response)->{
             response.body("application/json");
             long commentId = Long.parseLong(request.params("commentId"));
@@ -176,5 +198,5 @@ public class ArticleController implements Controller {
                 return objectMapper.writeValueAsString(new ErrorResponse(e.getMessage()));
             }
         });
-    }
+    }*/
 }
