@@ -22,9 +22,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Service service = Service.ignite();
         ObjectMapper objectMapper = new ObjectMapper();
-        InMemoryArticleRepository articleRepository=new InMemoryArticleRepository();
-        InMemoryCommentRepository commentRepository=new InMemoryCommentRepository(InMemoryArticleRepository);
-        ArticleService articleService=new ArticleService(articleRepository,commentRepository);
+        InMemoryArticleRepository articleRepository = new InMemoryArticleRepository();
+        InMemoryCommentRepository commentRepository = new InMemoryCommentRepository(articleRepository);
+        ArticleService articleService = new ArticleService(articleRepository,commentRepository);
         Application application = new Application(List.of(new ArticleController(service,articleService,objectMapper), new ArticleFreemarkerController(service, articleService, TemplateFactory.freeMarkerEngine())));
         application.start();
         HttpClient.newHttpClient().send(
