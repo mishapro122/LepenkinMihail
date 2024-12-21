@@ -1,0 +1,6 @@
+CREATE TABLE topic
+(
+  topic_id BIGSERIAL PRIMARY KEY,
+  text TEXT NOT NULL,
+  article_id BIGSERIAL NOT NULL
+)
