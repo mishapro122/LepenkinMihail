@@ -1,7 +1,9 @@
 package org.example.article;
 
 import org.example.comment.Comment;
+import org.example.topic.Topic;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -9,14 +11,16 @@ import java.util.Set;
 public class Article {
     private final ArticleId id;
     private final String name;
-    private final Set<String> tags;
+    private final Set<Topic> tags;
     private final List<Comment> comments;
+    private final boolean trending;
 
-    public Article(ArticleId id, String name, Set<String> tags, List<Comment> comments) {
+    public Article(ArticleId id, String name, Set<Topic> tags, List<Comment> comments, boolean trending) {
         this.id = id;
         this.name = name;
         this.tags = tags;
         this.comments = comments;
+        this.trending = trending;
     }
 
     public List<Comment> getComments() {
@@ -29,7 +33,7 @@ public class Article {
         return id.getValue();
     }
 
-    public Set<String> getTags() {
+    public Set<Topic> getTags() {
         return tags;
     }
 
@@ -37,26 +41,40 @@ public class Article {
         return name;
     }
 
+    public boolean isTrending() {
+        return trending;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id,name,tags,comments);
+        return Objects.hash(id,name,tags,comments,trending);
     }
 
     @Override
     public boolean equals(Object o){
         if (o instanceof Article article){
-            return Objects.equals(id,article.id) && Objects.equals(name, article.name) && Objects.equals(tags, article.tags) && Objects.equals(comments, article.comments);
+            return Objects.equals(id,article.id) && Objects.equals(name, article.name) && Objects.equals(tags, article.tags) && Objects.equals(comments, article.comments) && Objects.equals(trending, article.trending);
         }
         return false;
     }
 
     public Article withName(String newName){
-        return new Article(this.id,newName,this.tags,this.comments);
+        return new Article(this.id,newName,this.tags,this.comments, trending);
     }
     public Article withComments(List<Comment> newComments){
-        return new Article(this.id,this.name,this.tags,newComments);
+        if (newComments == null) return new Article(this.id, this.name, this.tags, new ArrayList<>(), false);
+        if (newComments.size()<=3){
+            return new Article(this.id,this.name,this.tags,newComments, false);
+        }
+        else {
+            return new Article(this.id, this.name, this.tags, newComments, true);
+        }
     }
-    public Article withTags(Set<String> tags){
-        return new Article(this.id,this.name,tags,this.comments);
+    public Article withTags(Set<Topic> tags){
+        return new Article(this.id,this.name,tags,this.comments, trending);
+    }
+
+    public Article withTrending(boolean newTrending){
+        return new Article(id,name,tags,comments,newTrending);
     }
 }
